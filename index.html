@@ -3,64 +3,90 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Interactive Hello</title>
+  <title>Uplifted Vibes ✨</title>
   <style>
     body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #a18cd1, #fbc2eb);
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
+      overflow: hidden;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 20px;
+      padding: 40px 30px;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      color: #fff;
+      max-width: 90%;
+      width: 400px;
+      transition: all 0.3s ease-in-out;
     }
 
     h1 {
-      color: #333;
+      font-size: 1.8rem;
       margin-bottom: 20px;
-      transition: all 0.3s ease;
+      animation: fadeIn 0.6s ease-in-out;
     }
 
     button {
-      padding: 10px 20px;
-      font-size: 16px;
+      padding: 12px 24px;
+      font-size: 1rem;
       border: none;
-      border-radius: 8px;
-      background-color: #007bff;
-      color: white;
+      border-radius: 30px;
+      background-color: #ffffff;
+      color: #6a1b9a;
+      font-weight: bold;
       cursor: pointer;
-      transition: background-color 0.3s;
+      transition: background-color 0.3s ease;
     }
 
     button:hover {
-      background-color: #0056b3;
+      background-color: #e0d0f7;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
-  <h1 id="greeting">Hello, world! 👋</h1>
-  <button onclick="changeGreeting()">Click Me</button>
+  <div class="card">
+    <h1 id="message">You’re doing amazing things. Keep going! 🚀</h1>
+    <button onclick="changeMessage()">Inspire Me ✨</button>
+  </div>
 
   <script>
-    const greetings = [
-      "Hello, world! 👋",
-      "Hey there! 😄",
-      "Welcome to my site! 🌐",
-      "You're awesome! 💫",
-      "Have a great day! ☀️"
+    const messages = [
+      "You’re doing amazing things. Keep going! 🚀",
+      "Believe in yourself — you’ve got this! 💪",
+      "Every step you take matters. 🌱",
+      "You’re capable of more than you know. 🌟",
+      "Breathe. Smile. Shine. 🌞",
+      "The best is yet to come. Stay ready. 🔥",
+      "Progress, not perfection. Keep moving! 🛤️",
+      "You're a light in the world — shine bright! 💡",
+      "Small efforts today create big results tomorrow. ⏳"
     ];
 
-    function changeGreeting() {
-      const greetingElement = document.getElementById("greeting");
-      const current = greetingElement.innerText;
-      let newGreeting = current;
-
-      while (newGreeting === current) {
-        newGreeting = greetings[Math.floor(Math.random() * greetings.length)];
+    function changeMessage() {
+      const msg = document.getElementById("message");
+      let newMessage = msg.innerText;
+      while (newMessage === msg.innerText) {
+        newMessage = messages[Math.floor(Math.random() * messages.length)];
       }
-
-      greetingElement.innerText = newGreeting;
+      msg.innerText = newMessage;
+      msg.style.animation = 'none';
+      void msg.offsetWidth; // trigger reflow
+      msg.style.animation = 'fadeIn 0.6s ease-in-out';
     }
   </script>
 </body>
