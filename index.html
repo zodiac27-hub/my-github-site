@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>hihi</title>
+  <title>Interactive Hello</title>
   <style>
     body {
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 100vh;
@@ -14,12 +15,53 @@
       font-family: Arial, sans-serif;
       background: #f4f4f4;
     }
+
     h1 {
       color: #333;
+      margin-bottom: 20px;
+      transition: all 0.3s ease;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #0056b3;
     }
   </style>
 </head>
 <body>
-  <h1>Bantot mo</h1>
+  <h1 id="greeting">Hello, world! 👋</h1>
+  <button onclick="changeGreeting()">Click Me</button>
+
+  <script>
+    const greetings = [
+      "Hello, world! 👋",
+      "Hey there! 😄",
+      "Welcome to my site! 🌐",
+      "You're awesome! 💫",
+      "Have a great day! ☀️"
+    ];
+
+    function changeGreeting() {
+      const greetingElement = document.getElementById("greeting");
+      const current = greetingElement.innerText;
+      let newGreeting = current;
+
+      while (newGreeting === current) {
+        newGreeting = greetings[Math.floor(Math.random() * greetings.length)];
+      }
+
+      greetingElement.innerText = newGreeting;
+    }
+  </script>
 </body>
 </html>
