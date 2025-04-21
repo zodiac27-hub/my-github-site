@@ -3,142 +3,120 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Power-Up Messages ⚡</title>
+  <title>The Echo Zone</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
     body {
-      height: 100vh;
-      background: radial-gradient(circle at top left, #ff00cc, #3333ff);
-      font-family: 'Orbitron', sans-serif;
+      margin: 0;
+      background: #0d0d0d;
+      color: #00ffe7;
+      font-family: 'Courier New', Courier, monospace;
       overflow: hidden;
+      height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: white;
+      flex-direction: column;
       position: relative;
     }
 
-    .floating-blobs {
+    .rings {
       position: absolute;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      z-index: 0;
-    }
-
-    .blob {
-      position: absolute;
-      border-radius: 50%;
-      opacity: 0.4;
-      animation: float 20s infinite;
-    }
-
-    .blob:nth-child(1) {
-      width: 400px;
-      height: 400px;
-      background: #ff00cc;
-      top: 20%;
-      left: 10%;
-    }
-
-    .blob:nth-child(2) {
       width: 300px;
       height: 300px;
-      background: #00ffff;
-      bottom: 15%;
-      right: 15%;
-      animation-delay: 5s;
+      border-radius: 50%;
+      border: 1px solid #00ffe7;
+      opacity: 0.05;
+      animation: pulse 4s infinite ease-out;
     }
 
-    @keyframes float {
-      0%, 100% {
-        transform: translateY(0px) rotate(0deg);
-      }
-      50% {
-        transform: translateY(-50px) rotate(180deg);
-      }
+    .rings::before,
+    .rings::after {
+      content: '';
+      position: absolute;
+      border: 1px solid #00ffe7;
+      border-radius: 50%;
+      opacity: 0.08;
     }
 
-    .card {
-      z-index: 1;
-      padding: 40px;
-      background: rgba(0, 0, 0, 0.4);
-      backdrop-filter: blur(20px);
-      border-radius: 20px;
-      text-align: center;
-      box-shadow: 0 0 30px rgba(255, 0, 255, 0.3);
-      animation: zoomIn 0.6s ease-out;
+    .rings::before {
+      width: 100%;
+      height: 100%;
+      animation: pulse 6s infinite ease-out;
     }
 
-    @keyframes zoomIn {
-      from {
+    .rings::after {
+      width: 150%;
+      height: 150%;
+      top: -25%;
+      left: -25%;
+      animation: pulse 8s infinite ease-out;
+    }
+
+    @keyframes pulse {
+      0% {
         transform: scale(0.8);
-        opacity: 0;
+        opacity: 0.1;
       }
-      to {
-        transform: scale(1);
-        opacity: 1;
+      100% {
+        transform: scale(2);
+        opacity: 0;
       }
     }
 
     h1 {
-      font-size: 1.8rem;
-      margin-bottom: 30px;
+      font-size: 1.5rem;
+      text-align: center;
+      max-width: 90%;
       line-height: 1.4;
-      animation: flicker 2s infinite alternate;
-    }
-
-    @keyframes flicker {
-      0% { opacity: 0.85; }
-      50% { opacity: 1; text-shadow: 0 0 10px #fff, 0 0 20px #0ff; }
-      100% { opacity: 0.85; }
+      z-index: 2;
+      animation: fadeIn 1s ease;
     }
 
     button {
-      padding: 14px 30px;
-      font-size: 1.1rem;
-      font-weight: bold;
-      color: #fff;
-      background: linear-gradient(135deg, #00f0ff, #ff00cc);
-      border: none;
-      border-radius: 40px;
+      margin-top: 30px;
+      background: transparent;
+      border: 2px solid #00ffe7;
+      color: #00ffe7;
+      padding: 10px 24px;
+      font-family: inherit;
+      font-size: 1rem;
+      border-radius: 4px;
       cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.3s;
-      box-shadow: 0 0 10px #00ffff, 0 0 20px #ff00cc;
+      transition: all 0.3s ease;
+      z-index: 2;
     }
 
     button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 20px #fff, 0 0 30px #0ff;
+      background: #00ffe7;
+      color: #0d0d0d;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="floating-blobs">
-    <div class="blob"></div>
-    <div class="blob"></div>
-  </div>
+  <div class="rings"></div>
 
-  <div class="card">
-    <h1 id="message">You are a powerhouse of potential. Unleash it! ⚡</h1>
-    <button onclick="changeMessage()">Power Me Up 🔥</button>
-  </div>
+  <h1 id="message">Message received: “Keep moving — the signal grows stronger.”</h1>
+  <button onclick="changeMessage()">New Transmission ▷</button>
 
   <script>
     const messages = [
-      "You are a powerhouse of potential. Unleash it! ⚡",
-      "Fuel your fire. The world needs your light! 🔥",
-      "Greatness is in motion. You’re the spark. ✨",
-      "Leap boldly. You were born to fly. 🛫",
-      "Energy. Focus. Victory. You got this. 🧠💥",
-      "Let the challenge ignite your passion. 🔥⚔️",
-      "You're electric — never stop charging forward! ⚡🔋"
+      "Message received: “Keep moving — the signal grows stronger.”",
+      "Transmission: “You are exactly where you're meant to be.”",
+      "Incoming: “Your energy shapes the timeline.”",
+      "Uplink active: “Create. Evolve. Echo.”",
+      "Code decoded: “You are the cause of the ripple.”",
+      "Signal lock: “Bravery isn’t loud — it’s steady.”"
     ];
 
     function changeMessage() {
@@ -147,10 +125,11 @@
       while (newMsg === msg.innerText) {
         newMsg = messages[Math.floor(Math.random() * messages.length)];
       }
-      msg.style.animation = 'none';
-      msg.offsetHeight; // Trigger reflow
-      msg.innerText = newMsg;
-      msg.style.animation = 'flicker 2s infinite alternate';
+      msg.style.opacity = 0;
+      setTimeout(() => {
+        msg.innerText = newMsg;
+        msg.style.opacity = 1;
+      }, 300);
     }
   </script>
 </body>
